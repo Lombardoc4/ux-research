@@ -12,6 +12,14 @@
   align-items: center;
 }
 
+.landing {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+  justify-content: center;
+  align-items: center;
+}
+
 .footer {
   display: flex;
   flex: 1;
@@ -51,10 +59,13 @@
 }
 
 .description {
-  margin: 4rem 0;
+  margin: 0;
   line-height: 1.5;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
+  
 }
+
+
 
 .code {
   background: #fafafa;
@@ -67,6 +78,8 @@
 
 .grid {
   display: flex;
+  flex-direction: column;
+  
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
@@ -74,15 +87,18 @@
 }
 
 .card {
-  margin: 1rem;
-  padding: 1.5rem;
+  margin: 1rem auto;
+  padding: 1rem 1.5rem;
   text-align: left;
   color: inherit;
   text-decoration: none;
   border: 1px solid #eaeaea;
   border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
   max-width: 300px;
+  box-shadow: 0 5px 10px -5px #000000;
+  border-color: #000000;
+  
 }
 
 .card:hover,
@@ -90,6 +106,9 @@
 .card:active {
   color: #0070f3;
   border-color: #0070f3;
+  transform: translateY(0.1rem);
+  box-shadow: 0 5px 5px -7px #0070f3, inset  0 5px 5px -5px #0070f3;
+  
 }
 
 .card h2 {
@@ -104,14 +123,18 @@
 }
 
 .logo {
-  height: 1em;
+  /* height: 1em; */
   margin-left: 0.5rem;
 }
 
 @media (max-width: 600px) {
+  .title{
+    font-size: 2.5rem;
+  }
+  
+  
   .grid {
     width: 100%;
-    flex-direction: column;
   }
 }
 

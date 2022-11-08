@@ -15,6 +15,18 @@ a {
   box-sizing: border-box;
 }
 
+.landing-arrow {
+  animation: arrow-loop 2s linear infinite;
+}
+
+@keyframes arrow-loop {
+  0%{ transform:  translateY(-0.5rem); opacity: 1;}  
+  33%{ transform:  translateY(0); opacity: 1;}  
+  65% { transform:  translateY(0.5rem); }  
+  66% { transform:  translateY(0.5rem); opacity: 0;}  
+  100% { transform:  translateY(-0.5rem);opacity: 0;}  
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
