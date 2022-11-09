@@ -15,6 +15,24 @@ a {
   box-sizing: border-box;
 }
 
+#exp1{
+  max-height: 100vh;
+  overflow: scroll;
+  scroll-snap-type: y mandatory;
+  /* display: flex;
+  overflow: auto;
+  flex: none;
+  flex-flow: column nowrap; */
+}
+
+#exp1 > * {
+  scroll-snap-align: center;
+}
+
+.action{
+  cursor: pointer;
+}
+
 .landing-arrow {
   animation: arrow-loop 2s linear infinite;
 }
