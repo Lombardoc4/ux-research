@@ -1,0 +1,7 @@
+type Exp1 @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  tag: String
+  type: String
+  time: Float
+  user: String
+}

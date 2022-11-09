@@ -1,0 +1,15 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-uxresearch-staging-210212-authRole",
+      "UnauthRoleArn": "arn:aws:iam::890078463828:role/amplify-uxresearch-staging-210212-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::890078463828:role/amplify-uxresearch-staging-210212-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-uxresearch-staging-210212-deployment",
+      "UnauthRoleName": "amplify-uxresearch-staging-210212-unauthRole",
+      "StackName": "amplify-uxresearch-staging-210212",
+      "StackId": "arn:aws:cloudformation:us-east-1:890078463828:stack/amplify-uxresearch-staging-210212/a72af2f0-435e-11ed-a653-0a8ada91baed",
+      "AmplifyAppId": "d1otrt5i62tu0h"
+    }
+  }
+}

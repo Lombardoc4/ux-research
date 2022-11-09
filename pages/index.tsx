@@ -1,69 +1,72 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { eventTracker } from '../hooks/useClickEvent'
 import styles from '../styles/Home.module.css'
+
+import { Amplify } from 'aws-amplify';
+import awsExports from '../src/aws-exports';
+Amplify.configure(awsExports);
 
 export default function Home() {
   const [initEvent, triggerInitEvent] = useState(false);
   const [clickEvent, setClickEvent] = useState(false);
-  const [event, setEvent] = useState(false);
   const [scrollEvent, setScrollEvent] = useState('');
   const userSessionStart = useMemo(() => new Date().getTime(), []);
-  
-  function handleClick(e: React.MouseEvent) {
+
+  function handleClick(e: React.SyntheticEvent<HTMLDivElement>) {
       // Prevent recording scrolling events
       triggerInitEvent(true);
       setClickEvent(true);
-      
+
       // TrackEvent
       eventTracker({
-        tag: `${e.target.dataset.tag}`, 
-        type: 'click', 
+        tag: `${e.currentTarget.dataset.tag}`,
+        type: 'click',
         time: userSessionStart
       })
-      
+
       // Scroll Into View
       document.getElementById('dashboard')?.scrollIntoView({behavior: "smooth"});
-    
+
   }
-  
-  function handleScroll(e: React.SyntheticEvent) {
-    
-    if (e.target?.scrollTop <= window.innerHeight/3) {
+
+  function handleScroll(e: React.SyntheticEvent<HTMLDivElement>) {
+
+    if (e.currentTarget.scrollTop <= window.innerHeight/3) {
       setScrollEvent('header');
     }
-    
-    if (e.target?.scrollTop > window.innerHeight/3) {
+
+    if (e.currentTarget.scrollTop > window.innerHeight/3) {
       setScrollEvent('body');
       triggerInitEvent(true);
-      
+
     }
-    
-    if (e.target?.scrollTop === window.innerHeight) {
+
+    if (e.currentTarget.scrollTop === window.innerHeight) {
       // triggerEvent(true);
       setClickEvent(false);
     }
-    
-    if (e.target?.scrollTop > window.innerHeight + 50) {
+
+    if (e.currentTarget.scrollTop > window.innerHeight + 50) {
       setScrollEvent('footer')
     }
-      
+
   }
-  
+
   useEffect(() => {
-    
+
     if (initEvent && !clickEvent && scrollEvent.length > 0) {
       eventTracker({
-        tag: `dashboard-${scrollEvent}`, 
-        type: 'scroll', 
+        tag: `dashboard-${scrollEvent}`,
+        type: 'scroll',
         time: userSessionStart
       });
     }
-      
+
   }, [scrollEvent])
-  
-  
+
+
   return (
     <div id="exp1" onScroll={handleScroll}>
       <Head>
@@ -72,13 +75,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      
+
         <div className={styles.landing}>
           <div className={styles.grid}>
             <h1 className={styles.title}>
               Welcome to&nbsp;Today
             </h1>
-            <div 
+            <div
               onClick={handleClick}
               tabIndex={0}
               className={styles.card + ' action'}
@@ -87,7 +90,7 @@ export default function Home() {
               Enter Now
             </div>
           </div>
-          <div 
+          <div
             onClick={handleClick}
             className={styles.description + ' action landing-arrow'}
             data-tag='dashboard-arrow'
@@ -96,7 +99,7 @@ export default function Home() {
             &darr;
           </div>
         </div>
-      
+
         <main id="dashboard" className={styles.main}>
           <h1 className={styles.title}>Test Complete</h1>
           <p className={styles.description}>Thank you</p>
