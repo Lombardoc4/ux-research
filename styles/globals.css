@@ -104,6 +104,12 @@ svg.hidden{
   }
   body {
     color: white;
+    fill: white;
     background: black;
+  }
+
+  .sharing {
+    border-color: #ffffff;
+    box-shadow: 0 5px 10px -5px #ffffff;
   }
 }

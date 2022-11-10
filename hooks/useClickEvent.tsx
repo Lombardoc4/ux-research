@@ -51,21 +51,4 @@ export async function eventTracker(event: Event) {
         }
       }
 
-    // Send data to db
-    // const confirmResult = true;
-    // const confirmResult = await DataStore.save(
-    //     new Exp1({
-    //         "tag": event.tag,
-    //         "type": event.type,
-    //         "time": (new Date().getTime() - event.time)/1000,
-    //         "user": (prevUser || 'U-' + event.time)
-    //     })
-    // );
-
-
-    // Set Cookie/Local Storage
-
-
-    // return confirmation
-
 }

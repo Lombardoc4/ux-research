@@ -6,8 +6,7 @@ export function Sharing({copy, userSessionStart}: {copy: string, userSessionStar
     const [clicked, setClicked] = useState(false)
     const copyEl = useRef<HTMLDivElement>(null);
 
-    function handleClick(e: React.SyntheticEvent) {
-        navigator.clipboard.writeText(copy);
+    async function handleClick(e: React.SyntheticEvent) {
         setClicked(true);
 
         // console.log('e',  e)
@@ -16,6 +15,8 @@ export function Sharing({copy, userSessionStart}: {copy: string, userSessionStar
             type: 'click',
             time: userSessionStart
         })
+
+
 
         // Turn off in five seconds
         setTimeout(() => {
@@ -27,6 +28,22 @@ export function Sharing({copy, userSessionStart}: {copy: string, userSessionStar
                     dashboard.click();
             }
         }, 5000)
+
+        if (!navigator.canShare) {
+            return
+        }
+        const shareData = {
+            title: copy,
+            text: copy,
+            url: 'https://' + copy
+        }
+
+        console.log('shareData', shareData);
+        try {
+            await navigator.share(shareData)
+        } catch (err) {
+            navigator.clipboard.writeText(copy);
+        }
     }
 
     return (
