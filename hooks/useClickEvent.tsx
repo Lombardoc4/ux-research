@@ -41,6 +41,8 @@ export async function eventTracker(event: Event) {
         if (!prevUser && data && data.createExp1 && data.createExp1.id)
             window.localStorage.setItem('lom13-exp1', 'U-' + event.time);
 
+        return data.createExp1.id;
+
       } catch (e){
         if (typeof e === "string") {
             e.toUpperCase() // works, `e` narrowed to string
@@ -65,6 +67,5 @@ export async function eventTracker(event: Event) {
 
 
     // return confirmation
-
 
 }

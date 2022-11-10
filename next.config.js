@@ -10,6 +10,9 @@ const nextConfig = {
         hostname: 'crislombardo.com',
       }
     ]
+  },
+  env: {
+    userSessionId: new Date().getTime()
   }
 }
 

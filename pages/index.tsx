@@ -6,13 +6,16 @@ import styles from '../styles/Home.module.css'
 
 import { Amplify } from 'aws-amplify';
 import awsExports from '../src/aws-exports';
+import { Sharing } from '../component/Sharing'
 Amplify.configure(awsExports);
+
 
 export default function Home() {
   const [initEvent, triggerInitEvent] = useState(false);
   const [clickEvent, setClickEvent] = useState(false);
   const [scrollEvent, setScrollEvent] = useState('');
   const userSessionStart = useMemo(() => new Date().getTime(), []);
+
 
   function handleClick(e: React.SyntheticEvent<HTMLDivElement>) {
       // Prevent recording scrolling events
@@ -25,6 +28,10 @@ export default function Home() {
         type: 'click',
         time: userSessionStart
       })
+
+      if (e.currentTarget.dataset.href) {
+        window.open(e.currentTarget.dataset.href, "_self")
+      }
 
       // Scroll Into View
       document.getElementById('dashboard')?.scrollIntoView({behavior: "smooth"});
@@ -92,7 +99,7 @@ export default function Home() {
           </div>
           <div
             onClick={handleClick}
-            className={styles.description + ' action landing-arrow'}
+            className={styles.description2 + ' action landing-arrow'}
             data-tag='dashboard-arrow'
             tabIndex={0}
           >
@@ -101,22 +108,25 @@ export default function Home() {
         </div>
 
         <main id="dashboard" className={styles.main}>
-          <h1 className={styles.title}>Test Complete</h1>
-          <p className={styles.description}>Thank you</p>
+            <h1 className={styles.title}>Test Complete</h1>
+          <p className={styles.description1}>Support research by sharing with 3 people </p>
+            <Sharing copy='lom13.com' userSessionStart={userSessionStart}/>
+
+      {/* <footer id="footer" className={styles.footer}> */}
+          <div
+            onClick={handleClick}
+            className={styles.footer +  ' action'}
+            data-tag='dashboard-crislombardo.com'
+            data-href="https://crislombardo.com"
+          >
+            Powered by{' '}
+            <span className={styles.logo}>
+              <Image src="https://crislombardo.com/img/alligator.png" alt="Crickey Cris" width={72} height={36} />
+            </span>
+          </div>
         </main>
 
-      <footer id="footer" className={styles.footer}>
-        <a
-          href="https://crislombardo.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="https://crislombardo.com/img/alligator.png" alt="Crickey Cris" width={72} height={36} />
-          </span>
-        </a>
-      </footer>
+      {/* </footer> */}
     </div>
   )
 }
