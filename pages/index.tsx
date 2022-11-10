@@ -73,6 +73,14 @@ export default function Home() {
 
   }, [scrollEvent])
 
+  useEffect(() => {
+    eventTracker({
+      tag: `experiment_1`,
+      type: 'load',
+      time: userSessionStart
+    })
+  }, [])
+
 
   return (
     <div id="exp1" onScroll={handleScroll}>
